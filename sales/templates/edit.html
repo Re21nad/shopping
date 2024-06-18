@@ -1,0 +1,18 @@
+{%extends 'base.html'%}    
+{% block content %}
+    {{p1}}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1 class="text-success text-center">What do you want to edit?</h1>
+
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button class="btn btn_primary" type="submit">Edit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}

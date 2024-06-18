@@ -1,0 +1,110 @@
+{%extends 'base.html'%}    
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1 class="text-center text-success">Hello World</h1>
+                <div class="m-5">
+                    <form action="/article/" method="post">
+                        {% csrf_token %}
+                        <input type="text" name="name">
+                        <input type="text" name="age">
+                        <button class="btn btn_primary" type="submit">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <form action="{% url 'home' %}" method="get">
+                    {% csrf_token %}
+                    <input type="text" name="phone">
+                    <button class="btn btn_primary" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="row">
+                <form action="/create/" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col">
+                            <label for="name">name</label>
+                            <input type="text" name="name" id="name" class="form-control">  
+                        </div>
+                        <div class="col">
+                            <label for="color">color</label>
+                            <input type="text" name="color" id="name" class="form-control">   
+                        </div>
+                        <div class="col">
+                            <label for="price">price</label>
+                            <input type="text" name="price" id="price" class="form-control">  
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="qty">quantity</label>
+                            <input type="text" name="qty" id="qty" class="form-control">  
+                        </div>
+                        <div class="col">
+                            <label for="tax">tax</label>
+                            <input type="text" name="tax" id="tax" class="form-control">  
+                        </div>
+                        <div class="col">
+                            <label for="total">total</label>
+                            <input type="text" name="total" id="total" class="form-control">  
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col text-center">
+                            <button class="btn btn_primary">Save</button>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-sm-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>Id</td>
+                            <td>Name</td>
+                            <td>Color</td>
+                            <td>Price</td>
+                            <td>Quantity</td>
+                            <td>Tax</td>
+                            <td>Total</td>
+                            <td>Date</td>
+                            <td colspan="2">Actions</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for items in product %}
+                        <tr>
+                            <td>{{items.id}}</td>
+                            <td>{{items.name}}</td>
+                            <td>{{items.color}}</td>
+                            <td>{{items.price}}</td>
+                            <td>{{items.qty}}</td>
+                            <td>{{items.tax}}</td>
+                            <td>{{items.total}}</td>
+                            <td>{{items.data}}</td>
+                            <td><a href="{% url 'deleteitem' id=items.id %}"><i class="fa fa-trash text-danger" aria-hidden="true"></i></a></td>
+                            <td><a href="{% url 'editrecord' id=items.id %}"><i class="fa fa-edit text-success"></i></a></td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+    
+
